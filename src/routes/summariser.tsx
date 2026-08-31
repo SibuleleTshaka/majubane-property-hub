@@ -32,7 +32,7 @@ export const Route = createFileRoute("/summariser")({
       { property: "og:description", content: "Summarise emails, meetings and documents into actions and deadlines." },
     ],
   }),
-  component: Summariser;
+  component: Summariser,
 });
 
 function Summariser() {
