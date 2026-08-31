@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { Send } from "lucide-react";
 import { useState } from "react";
+import ReactMarkdown from "react-markdown";
 import { toast } from "sonner";
 
 import { AiNotice } from "@/components/AiNotice";
@@ -69,18 +70,23 @@ function Assistant() {
         <Card>
           <CardContent className="space-y-4 p-5">
             <div className="max-h-[55vh] space-y-4 overflow-y-auto pr-1">
-              {messages.map((m, i) => (
-                <div
-                  key={i}
-                  className={
-                    m.role === "user"
-                      ? "ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-primary px-4 py-3 text-sm text-primary-foreground"
-                      : "mr-auto max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-bl-sm bg-muted px-4 py-3 text-sm"
-                  }
-                >
-                  {m.content}
-                </div>
-              ))}
+              {messages.map((m, i) =>
+                m.role === "user" ? (
+                  <div
+                    key={i}
+                    className="ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-primary px-4 py-3 text-sm text-primary-foreground"
+                  >
+                    {m.content}
+                  </div>
+                ) : (
+                  <div
+                    key={i}
+                    className="prose prose-sm mr-auto max-w-[85%] rounded-2xl rounded-bl-sm bg-muted px-4 py-3 text-sm [&>ul]:my-2 [&>ul]:list-disc [&>ul]:pl-5 [&>p]:my-2 [&_strong]:font-semibold"
+                  >
+                    <ReactMarkdown>{m.content}</ReactMarkdown>
+                  </div>
+                ),
+              )}
               {loading && <p className="text-sm text-muted-foreground">Thinking…</p>}
             </div>
             <form
