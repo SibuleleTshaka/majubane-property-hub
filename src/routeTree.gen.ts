@@ -10,9 +10,12 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as ClientsRouteImport } from './routes/clients'
+import { Route as EmailAssistantRouteImport } from './routes/email-assistant'
 import { Route as EnquiriesRouteImport } from './routes/enquiries'
 import { Route as PropertiesRouteImport } from './routes/properties'
+import { Route as SummariserRouteImport } from './routes/summariser'
 import { Route as TasksRouteImport } from './routes/tasks'
 
 const IndexRoute = IndexRouteImport.update({
@@ -20,9 +23,19 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AssistantRoute = AssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ClientsRoute = ClientsRouteImport.update({
   id: '/clients',
   path: '/clients',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmailAssistantRoute = EmailAssistantRouteImport.update({
+  id: '/email-assistant',
+  path: '/email-assistant',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EnquiriesRoute = EnquiriesRouteImport.update({
@@ -35,6 +48,11 @@ const PropertiesRoute = PropertiesRouteImport.update({
   path: '/properties',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SummariserRoute = SummariserRouteImport.update({
+  id: '/summariser',
+  path: '/summariser',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TasksRoute = TasksRouteImport.update({
   id: '/tasks',
   path: '/tasks',
@@ -43,39 +61,76 @@ const TasksRoute = TasksRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/assistant': typeof AssistantRoute
   '/clients': typeof ClientsRoute
+  '/email-assistant': typeof EmailAssistantRoute
   '/enquiries': typeof EnquiriesRoute
   '/properties': typeof PropertiesRoute
+  '/summariser': typeof SummariserRoute
   '/tasks': typeof TasksRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/assistant': typeof AssistantRoute
   '/clients': typeof ClientsRoute
+  '/email-assistant': typeof EmailAssistantRoute
   '/enquiries': typeof EnquiriesRoute
   '/properties': typeof PropertiesRoute
+  '/summariser': typeof SummariserRoute
   '/tasks': typeof TasksRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/assistant': typeof AssistantRoute
   '/clients': typeof ClientsRoute
+  '/email-assistant': typeof EmailAssistantRoute
   '/enquiries': typeof EnquiriesRoute
   '/properties': typeof PropertiesRoute
+  '/summariser': typeof SummariserRoute
   '/tasks': typeof TasksRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/clients' | '/enquiries' | '/properties' | '/tasks'
+  fullPaths:
+    | '/'
+    | '/assistant'
+    | '/clients'
+    | '/email-assistant'
+    | '/enquiries'
+    | '/properties'
+    | '/summariser'
+    | '/tasks'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/clients' | '/enquiries' | '/properties' | '/tasks'
-  id: '__root__' | '/' | '/clients' | '/enquiries' | '/properties' | '/tasks'
+  to:
+    | '/'
+    | '/assistant'
+    | '/clients'
+    | '/email-assistant'
+    | '/enquiries'
+    | '/properties'
+    | '/summariser'
+    | '/tasks'
+  id:
+    | '__root__'
+    | '/'
+    | '/assistant'
+    | '/clients'
+    | '/email-assistant'
+    | '/enquiries'
+    | '/properties'
+    | '/summariser'
+    | '/tasks'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AssistantRoute: typeof AssistantRoute
   ClientsRoute: typeof ClientsRoute
+  EmailAssistantRoute: typeof EmailAssistantRoute
   EnquiriesRoute: typeof EnquiriesRoute
   PropertiesRoute: typeof PropertiesRoute
+  SummariserRoute: typeof SummariserRoute
   TasksRoute: typeof TasksRoute
 }
 
@@ -88,11 +143,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/assistant': {
+      id: '/assistant'
+      path: '/assistant'
+      fullPath: '/assistant'
+      preLoaderRoute: typeof AssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/clients': {
       id: '/clients'
       path: '/clients'
       fullPath: '/clients'
       preLoaderRoute: typeof ClientsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/email-assistant': {
+      id: '/email-assistant'
+      path: '/email-assistant'
+      fullPath: '/email-assistant'
+      preLoaderRoute: typeof EmailAssistantRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/enquiries': {
@@ -109,6 +178,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PropertiesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/summariser': {
+      id: '/summariser'
+      path: '/summariser'
+      fullPath: '/summariser'
+      preLoaderRoute: typeof SummariserRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tasks': {
       id: '/tasks'
       path: '/tasks'
@@ -121,9 +197,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AssistantRoute: AssistantRoute,
   ClientsRoute: ClientsRoute,
+  EmailAssistantRoute: EmailAssistantRoute,
   EnquiriesRoute: EnquiriesRoute,
   PropertiesRoute: PropertiesRoute,
+  SummariserRoute: SummariserRoute,
   TasksRoute: TasksRoute,
 }
 export const routeTree = rootRouteImport
