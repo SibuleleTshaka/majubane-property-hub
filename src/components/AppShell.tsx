@@ -15,7 +15,9 @@ import {
 } from "lucide-react";
 import { useState, type ReactNode } from "react";
 
-import logo from "@/assets/majubane-logo.png";
+import logoAsset from "@/assets/majubane-logo.png.asset.json";
+
+const logo = logoAsset.url;
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -40,19 +42,14 @@ const nav = [
   { to: "/summariser", label: "AI Summariser", icon: Sparkles },
 ] as const;
 
-export function Brand({ compact = false }: { compact?: boolean }) {
+export function Brand() {
   return (
-    <Link to="/" className="flex items-center gap-3">
-      <img src={logo} alt="Majubane Properties logo" width={40} height={40} className="h-10 w-10 object-contain" />
-      {!compact && (
-        <span className="leading-tight">
-          <span className="block text-sm font-bold tracking-tight">Majubane</span>
-          <span className="block text-xs text-muted-foreground">Properties</span>
-        </span>
-      )}
+    <Link to="/" className="flex items-center" aria-label="Majubane Properties home">
+      <img src={logo} alt="Majubane Properties logo" className="h-10 w-auto object-contain" />
     </Link>
   );
 }
+
 
 export function AppShell({
   title,
